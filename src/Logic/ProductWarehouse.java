@@ -1,6 +1,7 @@
 package Logic;
 
 import MyExceptions.*;
+
 import java.util.*;
 
 public class ProductWarehouse {
@@ -15,12 +16,14 @@ public class ProductWarehouse {
     }
 
 
-    public void addProduct(Product product) throws Exception {
+    public void addProduct(Product product) throws WarehouseException {
         for (var prod : products) {
             if (prod.getRegistrationNumber() == product.getRegistrationNumber()) {
                 throw new WarehouseException(warehouseName, "Продукт не можливо додати оскільки даний продукт на складу уже є.");
             }
         }
+
+        products.add(product);
     }
 
     public boolean removeProduct(Product product) {
@@ -43,30 +46,33 @@ public class ProductWarehouse {
 
         return res;
     }
+
     public List<String> getManufacturerList() {
         var res = new LinkedList<String>();
 
         for (var prod : products)
-            if(!res.contains(prod.getManufacturer()))
+            if (!res.contains(prod.getManufacturer()))
                 res.add(prod.getManufacturer());
 
         return res;
     }
-    public double getAllPrice(){
+
+    public double getAllPrice() {
         double res = 0;
 
         for (var prod : products)
-            res += prod.getPrice();
+            res += prod.getPrice() * prod.getNumber();
 
-        return  res;
+        return res;
     }
-    public int getTotalProductQuantity(){
+
+    public int getTotalProductQuantity() {
         int res = 0;
 
         for (var prod : products)
             res += prod.getNumber();
 
-        return  res;
+        return res;
     }
 
 
