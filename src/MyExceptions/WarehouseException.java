@@ -1,9 +1,9 @@
 package MyExceptions;
 
-public class GoodsException extends Exception {
+public class WarehouseException extends Exception {
     private String whoCalled;
 
-    public GoodsException(String whoCalled, String message) {
+    public WarehouseException(String whoCalled, String message) {
         super(message);
         this.whoCalled = whoCalled;
     }
